@@ -144,7 +144,21 @@ void Octree::create(const ofMesh & mesh, int numLevels) {
 //            recursively call subdivide on child
 //
 void Octree::subdivide(TreeNode & node, int numLevels, int level) {
-	
+	if (level >= numLevels) { return; }
+
+	vector<Box> boxList;
+
+	subDivideBox8(node.box, boxList);
+
+	for (TreeNode c : node.children) {
+		for (Box &b : boxList) {
+			c.box = b;
+			if (getMeshPointsInBox(node.points, b, c.points) > node.points.size()) {
+				int lvl = level++;
+				subdivide(c, numLevels, lvl);
+			}
+		}
+	}
 }
 
 //  primary recursive function to test for ray intersection, returns

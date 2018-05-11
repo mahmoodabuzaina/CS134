@@ -141,7 +141,7 @@ void Octree::create(const ofMesh & mesh, int numLevels) {
 //      (a) distribute points in parent node to child node
 //      (b) if there are points in child node add it to parent's children
 //      (c) if a child has more than one point
-//            recursively call subdivide on child
+//            recursively call subdivide on childadfsd
 //
 void Octree::subdivide(TreeNode & node, int numLevels, int level) {
 	if (level >= numLevels) { return; }
